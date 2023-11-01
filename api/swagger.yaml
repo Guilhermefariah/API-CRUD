@@ -1,0 +1,203 @@
+openapi: 3.0.1
+info:
+  title: API CRUD
+  description: API de CRUD para Usuários
+  version: 1.0.0
+servers:
+  - url: http://localhost:8800
+    description: Servidor local 
+tags:
+  - name: user
+    description: Acesso aos Usuários
+
+paths:
+  /user/{id}:
+    get:
+      tags:
+        - user
+      summary: Obtém um usuário pelo ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Usuário atualizado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: Usuário não encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackendException'
+    delete:
+      tags:
+        - user
+      summary: Deleta um usuário pelo ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Usuário deletado com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '404':
+          description: Usuário não encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackendException'
+
+  /user:
+    get:
+      tags:
+        - user
+      summary: Obtém todos os usuários
+      responses:
+        '200':
+          description: Usuário atualizado com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '404':
+          description: Usuário não encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackendException'
+    post:
+      tags:
+        - user
+      summary: Cria um novo usuário
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                idade:
+                  type: integer
+                NDPS:
+                  type: number
+                NDSS:
+                  type: number
+                professor:
+                  type: string
+                sala:
+                  type: number
+              example:
+                nome: "Exemplo"
+                idade: 30
+                NDPS: 9.5
+                NDSS: 8.7
+                professor: "John Doe"
+                sala: 101
+      responses:
+        '200':
+          description: Usuário atualizado com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '404':
+          description: Usuário não encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackendException'
+    put:
+      tags:
+        - user
+      summary: Atualiza um usuário
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                idade:
+                  type: integer
+                NDPS:
+                  type: number
+                NDSS:
+                  type: number
+                professor:
+                  type: string
+                sala:
+                  type: number
+              example:
+                nome: "Atualizado"
+                idade: 35
+                NDPS: 9.8
+                NDSS: 8.9
+                professor: "John Doe"
+                sala: 101
+      responses:
+        '200':
+          description: Usuário atualizado com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '404':
+          description: Usuário não encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackendException'
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+        idade:
+          type: integer
+        NDPS:
+          type: number
+        NDSS:
+          type: number
+        professor:
+          type: string
+        sala:
+          type: number
+    BackendException:
+      type: object
+      properties:
+        error:
+          type: string
