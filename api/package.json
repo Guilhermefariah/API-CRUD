@@ -1,15 +1,13 @@
 {
   "name": "api",
   "version": "1.0.0",
-  "description": "API CRUD",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
-    "build": "yarn install"
-    
-  },
+    "start": "nodemon index.js"
+  },  
   "keywords": [],
-  "author": "Guilhermefariah",
+  "author": "guilhermefariah",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
@@ -19,4 +17,5 @@
     "swagger-jsdoc": "^6.1.0",
     "swagger-ui-express": "^4.1.6"
   }
+  
 }
